@@ -9,6 +9,7 @@ require 'action_view'
 require 'action_view/helpers'
 require 'action_view/helpers/tag_helper'
 require 'i18n'
+require 'formtastic'
 
 require 'localized_language_select'
 
@@ -18,12 +19,12 @@ class LocalizedLanguageSelectTest < Test::Unit::TestCase
   include ActionView::Helpers::TagHelper
 
   def test_action_view_should_include_helper_for_object
-    assert ActionView::Helpers::FormBuilder.instance_methods.include?('localized_language_select')
-    assert ActionView::Helpers::FormOptionsHelper.instance_methods.include?('localized_language_select')
+    assert ActionView::Helpers::FormBuilder.instance_methods.include?(:localized_language_select)
+    assert ActionView::Helpers::FormOptionsHelper.instance_methods.include?(:localized_language_select)
   end
 
   def test_action_view_should_include_helper_tag
-    assert ActionView::Helpers::FormOptionsHelper.instance_methods.include?('localized_language_select_tag')
+    assert ActionView::Helpers::FormOptionsHelper.instance_methods.include?(:localized_language_select_tag)
   end
 
   def test_should_return_select_tag_with_proper_name_for_object
