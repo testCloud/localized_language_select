@@ -55,3 +55,4 @@ module LocalizedLanguageSelect
   end
 end
 require "localized_language/action_view_select"
+require "localized_language/formtastic_select"

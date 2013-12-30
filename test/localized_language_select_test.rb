@@ -99,6 +99,11 @@ class LocalizedLanguageSelectTest < Test::Unit::TestCase
     assert !list.include?(['Afrikaans', 'af'])
   end
 
+  def test_formtastic_input_is_defined
+    puts Formtastic::Inputs.constants.inspect
+    assert Formtastic::Inputs.constants.include?(:LanguageInput)
+  end
+
   # private
 
   def setup
