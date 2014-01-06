@@ -9,6 +9,9 @@ Requires Rails 2.2 (released November 21st, 2008) or later versions.
 Language names are loaded from hashes in plugin directory, according to <tt>I18n.locale</tt> value.
 
 You can easily translate language codes in your application like this:
+!openwindow1.gif!:http://hobix.com/
+
+!https://travis-ci.org/jwaterfaucett/localized_language_select.png!
 
 <pre>
   <%= I18n.t @user.language, :scope => 'languages' %>  

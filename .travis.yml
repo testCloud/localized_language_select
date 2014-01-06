@@ -1,0 +1,20 @@
+language: ruby
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - ruby-head
+  - jruby-19mode
+  - jruby-head
+
+script:
+  - bundle exec rake test
+
+branches:
+  only:
+    - master
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
