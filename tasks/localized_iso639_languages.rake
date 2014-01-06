@@ -1,7 +1,7 @@
 # use language_table.html
 
 require 'rubygems'
-require 'hpricot'
+require 'nokogiri'
 require 'open-uri'
 
 # Rake task for importing language names from Unicode.org's CLDR repository
@@ -37,7 +37,7 @@ namespace :import do
     begin
       puts "... getting the HTML file for locale '#{locale}'"
       url = 'http://en.wikipedia.org/wiki/ISO_639-1_language_matrix'
-      doc = Hpricot( open(url) )
+      doc = Nokogiri::HTML( open(url) )
     rescue => e
       puts "[!] Invalid locale name '#{locale}'! Not found in CLDR (#{e})"
       exit 0
@@ -48,14 +48,14 @@ namespace :import do
     # ----- Parse the HTML with Hpricot     ----------------------------------------
     puts "... parsing the HTML file"
     languages = []
-    doc.search("//tr").each do |row|
-      if row.search("td[@class='n']") && 
-         row.search("td[@class='n']").inner_html =~ /^nameslanguage$/ && 
-         row.search("td[@class='g']").inner_html =~ /^[a-z]{2,3}(?:_([A-Z][a-z]{3}))?(?:_([A-Z]{2}))?$/
-        code   = row.search("td[@class='g']").inner_text
+    doc.xpath("//tr").each do |row|
+      if row.xpath("td[@class='n']") && 
+         row.xpath("td[@class='n']").inner_html =~ /^nameslanguage$/ && 
+         row.xpath("td[@class='g']").inner_html =~ /^[a-z]{2,3}(?:_([A-Z][a-z]{3}))?(?:_([A-Z]{2}))?$/
+        code   = row.xpath("td[@class='g']").inner_text
         code.sub!('_','-')
         #debugger if code =~ /-/
-        name   = row.search("td[@class='v']").first.inner_text
+        name   = row.xpath("td[@class='v']").first.inner_text
         languages << { :code => code.to_sym, :name => name.to_s }
         print " ... #{name}"
       end

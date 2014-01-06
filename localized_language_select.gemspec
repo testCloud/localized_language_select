@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency "jeweler"
   
   s.add_development_dependency "rspec"
+  s.add_development_dependency 'nokogiri', '~> 1.6.0'
   s.add_development_dependency "simplecov"
   s.add_development_dependency "formtastic"
   
